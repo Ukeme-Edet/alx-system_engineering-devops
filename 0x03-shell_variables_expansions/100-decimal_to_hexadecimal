@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e $((0x$DECIMAL))
+printf "%x" $DECIMAL
