@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This shell script prints 10 times "Best School"
+i=0
+until ((i == 10)); do
+	echo "Best School"
+	((i++))
+done
