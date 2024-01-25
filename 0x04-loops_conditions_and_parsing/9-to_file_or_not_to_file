@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # This shell script gives you information about the school file
 if [[ -e school ]]; then
+	echo "school file exists"
 	if [[ -s school ]]; then
 		echo "school file is not empty"
 	else
