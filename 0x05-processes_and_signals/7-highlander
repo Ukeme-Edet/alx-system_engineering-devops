@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Displays `To infinity and beyond` indefinitely, sleeping for 2 seconds and then displays `I am invincible!!!` before exiting
+trap "echo 'I am invincible!!!'" SIGTERM
+while true; do
+	echo "To infinity and beyond"
+	sleep 2
+done
