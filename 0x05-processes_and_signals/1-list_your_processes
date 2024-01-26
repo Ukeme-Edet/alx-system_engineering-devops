@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Displays a list of currently running processes
+ps -ef
+# The -e option displays all processes, even those that are not associated with a terminal
+# The -f option displays a full listing
