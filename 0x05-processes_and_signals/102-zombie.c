@@ -12,7 +12,6 @@ int infinite_while(void);
 int main(void)
 {
 	int i;
-
 	pid_t child_pid;
 
 	for (i = 0; i < 5; i++)
@@ -33,8 +32,6 @@ int main(void)
 int infinite_while(void)
 {
 	while (1)
-	{
 		sleep(1);
-	}
 	return (0);
 }
