@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 # A Bash script that pings an IP address passed as an argument 5 times.
-ping -c 5 "$1"
+if [ "$1" ]; then
+	ping -c 5 "$1"
+else
+	echo "Usage: $0 {IP address}"
+fi
