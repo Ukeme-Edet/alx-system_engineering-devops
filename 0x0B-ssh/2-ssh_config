@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script that configures the SSH client so that you can connect to a server without typing a password.
+ssh-keygen -b 4096 -f ~/.ssh/id_rsa -N ""
+cat ~/.ssh/id_rsa.pub >>~/.ssh/authorized_keys
+echo "IdentityFile ~/.ssh/id_rsa" >>~/.ssh/config
+echo "StrictHostKeyChecking no" >>~/.ssh/config
+echo "UserKnownHostsFile /dev/null" >>~/.ssh/config
