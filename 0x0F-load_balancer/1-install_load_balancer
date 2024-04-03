@@ -6,17 +6,16 @@ apt-get purge -y haproxy
 apt-get install -y haproxy
 
 echo "ENABLED=1" >>/etc/default/haproxy
-cp /etc/haproxy/haproxy.cfg{,.original}
-echo "listen hbnb
-        bind 0.0.0.0:80
+cp /etc/haproxy/haproxy.cfg{,.orig}
+echo "frontend haproxy_frontend
+        bind *:80
         mode http
-        stats enable
-        stats uri /haproxy?stats
+        default_backend haproxy_backend
+
+backend haproxy_backend
+        mode http
         balance roundrobin
-        option httpclose
-        option forwardfor
         server 520666-web-01 54.237.64.41:80 check 
-        server 520666-web-02 54.146.84.7:80 check
-" >>/etc/haproxy/haproxy.cfg
+        server 520666-web-02 54.146.84.7:80 check" >>/etc/haproxy/haproxy.cfg
 
 service haproxy reload
