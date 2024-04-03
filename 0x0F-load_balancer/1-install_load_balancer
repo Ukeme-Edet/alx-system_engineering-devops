@@ -4,31 +4,16 @@
 # - Configure HAproxy so that it send traffic to web-02 and web-03.
 # - Make sure that HAproxy can be managed via an init script.
 
-sudo apt-get update -y
-sudo apt-get install -y haproxy
-
-echo "# Defaults file for HAProxy
-#
-# This is sourced by both, the initscript and the systemd unit file, so do not
-# treat it as a shell script fragment.
-
-# Change the config file location if needed
-#CONFIG=\"/etc/haproxy/haproxy.cfg\"
-
-ENABLED=1
-
-# Add extra flags here, see haproxy(1) for a few options
-#EXTRAOPTS=\"-de -m 16\"" | sudo tee /etc/default/haproxy
-
-echo "frontend haproxy
+apt-get -y update
+apt-get -y install haproxy
+echo "ENABLED=1" >>/etc/default/haproxy
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
+echo "frontend haproxy_in
         bind *:80
-        mode http
-        default_backend webservers
+        default_backend haproxy_out
 
-backend webservers
-        mode http
+backend haproxy_out
         balance roundrobin
-        server 520666-web-01 54.237.64.41:80 check
-        server 520666-web-02 54.146.84.7:80 check" | sudo tee /etc/haproxy/haproxy.cfg
-
-sudo service haproxy restart
+        server web-02
+        server web-03" >>/etc/haproxy/haproxy.cfg
+service haproxy restart
