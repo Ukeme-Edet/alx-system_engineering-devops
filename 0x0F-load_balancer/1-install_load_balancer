@@ -2,6 +2,7 @@
 # Installs HAProxy version 2.4 with the following configurations:
 
 apt-get update -y
+apt-get purge -y haproxy
 apt-get install -y haproxy
 
 echo "ENABLED=1" >>/etc/default/haproxy
@@ -14,7 +15,7 @@ echo "frontend haproxy_frontend
 backend haproxy_backend
         mode http
         balance roundrobin
-        server 520666-web-01 54.237.64.41 check 
-        server 520666-web-02 54.146.84.7 check" >>/etc/haproxy/haproxy.cfg
+        server 520666-web-01 54.237.64.41:80 check 
+        server 520666-web-02 54.146.84.7:80 check" >>/etc/haproxy/haproxy.cfg
 
-service haproxy restart
+service haproxy reload
