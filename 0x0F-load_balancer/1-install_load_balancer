@@ -5,7 +5,7 @@ sudo apt-get update -y
 sudo apt-get purge -y haproxy
 sudo apt-get install -y haproxy
 
-sudo echo "ENABLED=1" >>/etc/default/haproxy
+echo "ENABLED=1" | sudo tee /etc/default/haproxy -a
 sudo cp /etc/haproxy/haproxy.cfg{,.orig}
 sudo echo "frontend haproxy_frontend
         bind *:80
@@ -16,6 +16,6 @@ backend haproxy_backend
         mode http
         balance roundrobin
         server 520666-web-01 54.237.64.41:80 check 
-        server 520666-web-02 54.146.84.7:80 check" >>/etc/haproxy/haproxy.cfg
+        server 520666-web-02 54.146.84.7:80 check" | sudo tee /etc/haproxy/haproxy.cfg -a
 
 sudo service haproxy reload
