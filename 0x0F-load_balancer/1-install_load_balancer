@@ -2,6 +2,7 @@
 # Installs HAProxy version 2.4 with the following configurations:
 
 sudo apt-get update -y
+sudo apt-get purge -y haproxy
 sudo apt-get install -y haproxy
 
 echo "ENABLED=1" | sudo tee /etc/default/haproxy -a
