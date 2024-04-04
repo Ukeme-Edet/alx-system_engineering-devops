@@ -3,6 +3,11 @@
 
 sudo apt-get update
 sudo apt-get install -y nginx
-sudo service nginx start
-sudo sed -i 's/8080/80/g' /etc/nginx/sites-available/default
-sudo service nginx restart
+pid=$(ss -tnlp | grep ':80' | awk '{print $NF}')
+if [[ -n "$pid" ]]; then
+	kill "$pid"
+else
+	exit 0
+fi
+sed -i 's/8080/80/' /etc/nginx/sites-available/default
+service nginx start
