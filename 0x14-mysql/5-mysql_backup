@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# A bash script to backup MySQL database
+sudo mysqldump -u root -p "$1" --all-databases | sudo tee backup.sql >/dev/null
+sudo tar -zcvf "$(date +%d-%m-%Y).tar.gz" backup.sql
