@@ -11,7 +11,7 @@ from sys import argv
 
 if __name__ == "__main__":
     with requests.Session() as s:
-        url = "https://jsonplaceholder.typicode.com/users/{}".format(argv[2])
+        url = "https://jsonplaceholder.typicode.com/users/{}".format(argv[1])
         todos = s.get(f"{url}/todos").json()
         user = s.get(url).json()
         done_todos = [todo for todo in todos if todo["completed"]]
