@@ -6,8 +6,8 @@ This script gathers data from an API and prints the tasks completed by an\
 Usage: python3 0-gather_data_from_an_API.py [employee_id]
 """
 
-from sys import argv
 import requests
+from sys import argv
 
 if __name__ == "__main__":
     with requests.Session() as s:
