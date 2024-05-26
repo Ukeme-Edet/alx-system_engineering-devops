@@ -1,6 +1,7 @@
 #!usr/bin/python3
 """
-This module contains a function to retrieve the number of subscribers for a given subreddit.
+This module contains a function to retrieve the number of subscribers for a\
+    given subreddit.
 """
 import requests
 
