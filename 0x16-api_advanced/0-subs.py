@@ -19,7 +19,7 @@ def number_of_subscribers(subreddit):
     with requests.Session() as session:
         session.headers = {"User-Agent": "Mozilla/5.0"}
         url = f"https://www.reddit.com/r/{subreddit}/about.json"
-        response = session.get(url)
+        response = session.get(url, allow_redirects=False)
         if response.status_code == 404:
             return 0
         return response.json().get("data").get("subscribers")
