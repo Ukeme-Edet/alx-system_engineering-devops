@@ -16,19 +16,10 @@ def number_of_subscribers(subreddit):
     Returns:
             int: The number of subscribers for the subreddit.
     """
-    mh_url = "https://www.reddit.com/api/me.json"
+    url = f"https://www.reddit.com/r/{subreddit}/about"
     headers = {"User-Agent": "Mozilla/5.0"}
-    headers["X-Modhash"] = (
-        requests.get(mh_url, headers=headers).json().get("data").get("modhash")
-    )
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
     with requests.Session() as sess:
-        try:
-            return (
-                sess.get(url, headers=headers)
-                .json()
-                .get("data")
-                .get("subscribers")
-            )
-        except Exception:
-            return 0
+        response = sess.get(url, headers=headers)
+        if response.status_code == 200:
+            return response.json().get("data").get("subscribers")
+        return 0
