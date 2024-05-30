@@ -14,16 +14,14 @@ def number_of_subscribers(subreddit):
             subreddit (str): The name of the subreddit.
 
     Returns:
-        int: The number of subscribers for the subreddit, or 0 if the\
-            subreddit is invalid.
+            int: The number of subscribers for the subreddit.
     """
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {"User-Agent": "Mozilla/5.0"}
-
-    try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        if response.status_code == 200:
-            return response.json().get("data", {}).get("subscribers", 0)
-        return 0
-    except requests.RequestException:
-        return 0
+    with requests.Session() as sess:
+        url = f"https://www.reddit.com/r/{subreddit}/about.json"
+        headers = {"User-Agent": "Mozilla/5.0"}
+        try:
+            response = sess.get(url, headers=headers)
+            data = response.json().get("data")
+            return data.get("subscribers")
+        except Exception:
+            return 0
