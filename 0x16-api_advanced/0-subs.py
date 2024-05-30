@@ -20,8 +20,11 @@ def number_of_subscribers(subreddit):
         url = f"https://www.reddit.com/r/{subreddit}/about.json"
         headers = {"User-Agent": "Mozilla/5.0"}
         try:
-            response = sess.get(url, headers=headers)
-            data = response.json().get("data")
-            return data.get("subscribers")
+            return (
+                sess.get(url, headers=headers)
+                .json()
+                .get("data")
+                .get("subscribers")
+            )
         except Exception:
             return 0
