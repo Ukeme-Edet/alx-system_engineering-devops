@@ -9,12 +9,14 @@ import requests
 
 def count_words(subreddit, word_list, word_count={}, after=None):
     """
-    Count the occurrences of words from a given word list in the titles of the hot posts of a subreddit.
+    Count the occurrences of words from a given word list in the titles of the\
+        hot posts of a subreddit.
 
     Args:
             subreddit (str): The name of the subreddit.
             word_list (list): A list of words to count.
-            word_count (dict): A dictionary to store the word counts (default {}).
+            word_count (dict): A dictionary to store the word counts (default\
+                {}).
             after (str): The "after" parameter for pagination (default None).
 
     Returns:
