@@ -16,7 +16,7 @@ def number_of_subscribers(subreddit):
     Returns:
             int: The number of subscribers for the subreddit.
     """
-    url = f"https://www.reddit.com/r/{subreddit}/about"
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {"User-Agent": "Mozilla/5.0"}
     with requests.Session() as sess:
         try:
