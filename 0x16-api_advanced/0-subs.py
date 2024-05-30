@@ -5,10 +5,11 @@ This module contains a function to retrieve the number of subscribers for a\
 """
 import requests
 
-headers = {
-    "User-Agent": "Mozilla/5.0",
-    "X-Modhash": f"{requests.get("https://www.reddit.com/api/me.json").json().get("data").get("modhash")}",
-}
+mh_url = "https://www.reddit.com/api/me.json"
+headers = {"User-Agent": "Mozilla/5.0"}
+headers["X-Modhash"] = (
+    requests.get(mh_url, headers=headers).json().get("data").get("modhash")
+)
 
 
 def number_of_subscribers(subreddit):
@@ -32,7 +33,3 @@ def number_of_subscribers(subreddit):
             )
         except Exception:
             return 0
-
-
-print(number_of_subscribers("programming"))
-print(number_of_subscribers("this_is_a_fake_subreddit"))
