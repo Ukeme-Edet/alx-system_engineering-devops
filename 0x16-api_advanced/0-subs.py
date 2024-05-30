@@ -19,7 +19,10 @@ def number_of_subscribers(subreddit):
     url = f"https://www.reddit.com/r/{subreddit}/about"
     headers = {"User-Agent": "Mozilla/5.0"}
     with requests.Session() as sess:
-        response = sess.get(url, headers=headers)
-        if response.status_code == 200:
-            return response.json().get("data").get("subscribers")
-        return 0
+        try:
+            response = sess.get(url, headers=headers, allow_redirects=False)
+            if response.status_code == 200:
+                return response.json().get("data").get("subscribers")
+            return 0
+        except Exception:
+            return 0
