@@ -1,0 +1,13 @@
+server {
+    listen 80;
+    server_name www.0xtech-wiz.tech;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://0.0.0.0:8080;
+    }
+
+    location /static {
+        alias /home/ubuntu/AirBnB_clone_v3/web_static;
+    }
+}
