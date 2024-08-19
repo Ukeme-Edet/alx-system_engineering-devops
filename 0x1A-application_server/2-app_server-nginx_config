@@ -2,6 +2,8 @@ server {
     listen 80;
     server_name www.0xtech-wiz.tech;
 
+    add_header X-Served-By $HOSTNAME;
+
     location / {
         include proxy_params;
         proxy_pass http://0.0.0.0:8080;
