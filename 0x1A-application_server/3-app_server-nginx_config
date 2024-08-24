@@ -6,8 +6,12 @@ server {
 
 	add_header X-Served-By $hostname;
 
-	location /airbnb-onepage/ {
+	location = /airbnb-onepage/ {
 		proxy_pass http://localhost:5000/airbnb-onepage/;
+	}
+
+	location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+		proxy_pass http://localhost:5001/airbnb-dynamic/number_odd_or_even/$1;
 	}
 
 	error_page 404 /404.html;
