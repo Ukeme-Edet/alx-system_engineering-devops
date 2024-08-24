@@ -1,0 +1,26 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+
+	server_name _;
+
+	add_header X-Served-By $hostname;
+
+	location = /airbnb-onepage/ {
+		proxy_pass http://localhost:5000/airbnb-onepage/;
+	}
+
+	location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+		proxy_pass http://localhost:5001/airbnb-dynamic/number_odd_or_even/$1;
+	}
+
+	location /api {
+		proxy_pass http://localhost:5002/api;
+	}
+
+	error_page 404 /404.html;
+	location = /404.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
+}
